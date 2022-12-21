@@ -18,6 +18,7 @@ Click the Open button and in the input area make sure you set the the input mode
 Now we need to start the sensor and setup the frequency at which we want to read the data stream. For this, Open the serial port and write the following commands on the *Input:* cell.
 
 > AT+SMPF=200 
+> 
 > AT+GSTD
 
 *AT+GSTD* restarts the data stream exchange with the serial port. *AT+SMPF* defines thesample frequency for the serial port.
