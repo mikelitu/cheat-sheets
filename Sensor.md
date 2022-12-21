@@ -13,10 +13,11 @@ $ sudo apt-get install cutecom lrzsz
 
 Validate the installation running the `$ cutecom` command on the Linux terminal. Once the GUI is opened, find the serial port corresponding to the sensor that should look like the following */dev/ttyUSB_* where the underscore represents any number.
 
-Click the Open button and in the input area make sure you set the the input mode to CR/LF in the sliding window (look at the image below) ![cutecome](imgs/cutecom.png). More info on the commands can be found [here]().
+Click the Open button and in the input area make sure you set the the input mode to CR/LF in the sliding window (look at the image below) ![cutecome](imgs/cutecom.png). 
 
-> AT+SMPF=200
->  
+Now we need to start the sensor and setup the frequency at which we want to read the data stream. For this, Open the serial port and write the following commands on the *Input:* cell.
+
+> AT+SMPF=200 
 > AT+GSTD
 
 *AT+GSTD* restarts the data stream exchange with the serial port. *AT+SMPF* defines thesample frequency for the serial port.
