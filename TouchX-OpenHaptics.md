@@ -1,8 +1,8 @@
-# TouchX
+# TouchX-OpenHaptics
 
-This file contains information on how to setup the TouchX haptic device in both Linux and Windows. Additionally, it contains a brief introduction to the OpenHaptics API to use the TouchX on your projects.
+This file contains a brief introduction to the OpenHaptics API to use the TouchX on your projects.
 
-## Setup the device and install OpenHaptics
+## Install OpenHaptics and setup the device
 
 To set up the TouchX device from [3DSystems](https://www.3dsystems.com/), we will need two different things [OpenHaptics](https://www.3dsystems.com/haptics-devices/openhaptics) and the Touch X device drivers.
 
@@ -64,11 +64,19 @@ For a more detailed setup guide click [here](https://s3.amazonaws.com/dl.3dsyste
 
 ### Windows 10/11
 
+Download the latest version of OpenHaptics, which is currently v3.5.0 from the official [webpage](https://support.3dsystems.com/s/article/OpenHaptics-for-Windows-Developer-Edition-v35?language=en_US). Once it is done, follow the instructions below:
 
+1. Uninstall any previous version of OpenHaptics if any
+1. Unzip the file
+1. Run .exe file
+
+The installation by default will be at the directory *C:/OpenHaptics*.
+
+For the drivers download the drivers from the same [webpage](https://support.3dsystems.com/s/article/OpenHaptics-for-Windows-Developer-Edition-v35?language=en_US). Execute the file and let the drivers to be installed. Plugged your device in.
 
 ## How to use OpenHaptics
 
-OpenHaptics provides an API to read the commands from any haptic device and include them in any of your project. The main library for this is known as **HD** and **HDU**, which includes the data types to retieve the state of the device. Here is a simple explanation on how to use the OpenHaptics library in your project. The complete documentation for the OpenHaptics library can be found [here]().
+OpenHaptics provides an API to read the commands from any haptic device and include them in any of your project. The main library for this is known as **HD** and **HDU**, which includes the data types to retieve the state of the device. Here is a simple explanation on how to use the OpenHaptics library in your project. The complete documentation for the OpenHaptics library can be found [here](https://s3.amazonaws.com/dl.3dsystems.com/binaries/Sensable/OH/3.5/OpenHaptics_Toolkit_ProgrammersGuide.pdf).
 
 ### Requirements
 
@@ -146,6 +154,8 @@ To read the encoders from the robot you need to include the header files from Op
 
 ### API functions
 
+HD contains many functions to initialize and use the device inside your C++ framework. This is just a very short introduction to the most used functions. For a complete reference guide to the latest OpenHaptics library functions refer to the official [webpage](https://s3.amazonaws.com/dl.3dsystems.com/binaries/Sensable/OH/3.5/OpenHaptics_Toolkit_API_Reference_Guide.pdf).
+
 #### How to handle the data
 
 This is my recommendation and how most of the people handle the data from the Haptic device to facilitate acess to data from different applications inside your project. Defining a data structure with all the information from the device its an interesting approach, here you have an example of how to build the structure and which data type to assign to each entrance.
@@ -165,7 +175,41 @@ struct TouchState {
 
 #### Initialize device
 
+The haptic device inside HDAPI is defined with the variable *HHD*. We want to catch any possible error that starting the device may cause.. We want to enable the force display so we need to include the command. Now we initialize the scheduler for the haptic device. Finally, we create an instance of our data structure *TouchState* and call the callback function to run asynchronously during the execution of the program. We will go deeper on how to program a callback function in the next section. Here is a small snippet of a *main.cpp* file code on how to initialize the device.
 
+```cpp
+// include headers here
+
+// callback function explained in next section here
+
+int main {
+    ///////////////////
+    // Init Touch X //
+    /////////////////
+
+    HDErrorInfo error; // catch the initialization errors
+    HHD hHD = hdInitDevice(HD_DEFAULT_DEVICE); // init device
+
+    // Catch initialization errors
+    if (HD_DEVICE_ERROR(error = hdGetError())) {
+        hduPrintError(stderr, &error, "Failed to start haptic device");
+    }
+
+    // Enable force feedback
+    hdEnable(HD_FORCE_OUTPUT);
+
+    // Start the scheduler & catch errors
+    hdStartScheduler();
+    if (HD_DEVICE_ERROR(error = hdGetError())) {
+        hduPrintError(stderr, &error, "Failed to start scheduler");
+    }
+
+    HHD_Auto_Calibration();
+    // Define the data structure and the callback loop
+    TouchState state;
+    hdScheduleAsynchronous(touch_state_callback, &state, HD_MAX_SCHEDULER_PRIORITY);
+}
+```
 
 #### Callback to update device state
 
