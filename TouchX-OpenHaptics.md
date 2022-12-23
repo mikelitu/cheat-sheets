@@ -2,13 +2,73 @@
 
 This file contains information on how to setup the TouchX haptic device in both Linux and Windows. Additionally, it contains a brief introduction to the OpenHaptics API to use the TouchX on your projects.
 
-## Setup the device
+## Setup the device and install OpenHaptics
+
+To set up the TouchX device from [3DSystems](https://www.3dsystems.com/), we will need two different things [OpenHaptics](https://www.3dsystems.com/haptics-devices/openhaptics) and the Touch X device drivers.
+
+### Ubuntu (Focal 20.04)
+
+The installer from the latest version of OpenHaptics for Ubuntu 20.04 can be found in this [link](https://support.3dsystems.com/s/article/OpenHaptics-for-Linux-Developer-Edition-v34?language=en_US). Download the compressed file and run the following commands on the terminal.
+
+```
+$ cd /path/to/file
+$ tar -zvxf openhaptics_3.4-0-developer-edition-amd64.tar.gz
+$ cd openhaptics_3.4-0-developer-edition-amd64
+$ sudo ./install
+```
+
+This is a short explanation for the code:
+
+> 1. Change to the file directory
+> 1. Extract the file and change to the newly extracted directory
+> 1. Install OpenHaptics via the install file
+
+The PC will automatically reboot after the installation. Check that *OpenHaptics* is installed into */opt/OpenHaptics*.
+
+Now, we need to install the drivers for the TouchX device. For Linux you can find them on the same webpage as [OpenHaptics](https://support.3dsystems.com/s/article/OpenHaptics-for-Linux-Developer-Edition-v34?language=en_US). Download the files and copy the following commands on the terminal.
+
+```
+$ sudo apt-get update
+$ sudo apt-get install qt5-default
+$ cd /path/to/file
+$ tar -zvxf TouchDriver2022_04_04.tar.gz
+$ cd TouchDriver2022_04_04
+$ sudo cp ./usr/lib/LibPhantomIOLib42.so /usr/lib/
+```
+
+Now you can connect the TouchX via the USB port. First, run the command:
+```
+bash ListUSBHapticDevices
+```
+This should print the connected device with the following COM name */dev/ttyACM\** where * is any number. To grant permissions to the COM port you could run either
+
+```
+$ sudo chmod 777 /dev/ttyACM*
+```
+or
+```
+$ sudo adduser YourUserName dialout
+```
+
+I recommend using the second as it will grant privilege to every COM port you connect and you do not need to run the command more times even if you log out or reboot the system.
+
+Before finishing with the setup of the device we are going to add a new variable to the environment to let the script know where we want to save the configuration files.
+
+```
+$ echo "export GSTDD_HOME = /home/user/.3dsystems" >> ~/.bashrc
+```
+
+Now finish the setup running the *./bin/Touch_Setup* and apply and save the necessary changes. I recommend keeping the name to **Default Device** if we only are connecting a single TouchX. You can calibrate the system using the script *./bin/Touch_Diagnostics*.
+
+For a more detailed setup guide click [here](https://s3.amazonaws.com/dl.3dsystems.com/binaries/Sensable/Linux/Installation+Instructions_2022.pdf).
+
+### Windows 10/11
 
 
 
-## OpenHaptics
+## How to use OpenHaptics
 
-OpenHaptics provides an API to read the commands from any haptic device and include them in any of your project. The main library for this is known as **HD** and **HDU**, which includes the data types to retieve the state of the device. Here is a simple explanation on how to use the OpenHaptics library in your project.
+OpenHaptics provides an API to read the commands from any haptic device and include them in any of your project. The main library for this is known as **HD** and **HDU**, which includes the data types to retieve the state of the device. Here is a simple explanation on how to use the OpenHaptics library in your project. The complete documentation for the OpenHaptics library can be found [here]().
 
 ### Requirements
 
@@ -22,7 +82,7 @@ $ sudo snap install cmake --classic
 
 In Windows, download the latest available binary version from the official [CMake download webpage](https://cmake.org/download/). Execute the binary and follow the instructions for the installation.
 
-#### VisualStudio (Windows)
+#### VisualStudio 2015/2017 (Windows)
 
 In Windows, I recommend using VisualStudio to build the binaries of your project. Install the latest version from [VisualStudio download webpage](https://visualstudio.microsoft.com/downloads/).
 
