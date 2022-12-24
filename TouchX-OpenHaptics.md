@@ -208,8 +208,60 @@ int main {
     // Define the data structure and the callback loop
     TouchState state;
     hdScheduleAsynchronous(touch_state_callback, &state, HD_MAX_SCHEDULER_PRIORITY);
+
+    // Your script commands here
+
+    hdStopScheduler();
+    hdDisableDevice(hHD);
+    return 0;
 }
 ```
 
 #### Callback to update device state
 
+To update the state of the device we use a callback function to run asynchronously during the execution of your script. This callback in the previous example will update the **TouchState** data structure. We obtain the information of the device encoders by directly using **HD** library functions. The callback method needs the use of a *\*pUserData*, that will be casted into the **TouchState** data structure. Here is an small example of a callback loop.
+
+```cpp
+HDCallbackCode HDCALLBACK touch_state_callback(void *pUserData) {
+    TouchState *touch_state = static_cast<TouchState *>(pUserData);
+
+    hdBeginFrame();
+    // Get transform angles
+    hduMatrix cur_transform, pre_transform;
+    hdGetDoublev(HD_CURRENT_TRANSFORM, cur_transform);
+    hdGetDoublev(HD_LAST_TRANSFORM, pre_transform);
+    hdGetDoublev(HD_CURRENT_JOINT_ANGLES, touch_state->joints);
+    // Position
+    touch_state->pre_position = hduVector3Dd(pre_transform[0][3], -pre_transform[2][3], pre_transform[1][3]);
+    touch_state->position = hduVector3Dd(cur_transform[0][3], -cur_transform[2][3], pre_transform[1][3]);
+
+    // Orientation (quaternion)
+    hduMatrix cur_rotation(cur_transform);
+    hduMatrix pre_rotation(pre_transform);
+    cur_rotation.getRotationMatrix(cur_rotation);
+    pre_rotation.getRotationMatrix(pre_rotation);
+    hduMatrix rotation_offset(0.0, -1.0, 0.0, 0.0,
+                              1.0,  0.0, 0.0, 0.0,
+                              0.0,  0.0, 1.0, 0.0,
+                              0.0,  0.0, 0.0, 1.0);
+    rotation_offset.getRotationMatrix(rotation_offset);
+    touch_state->rot = hduQuaternion(rotation_offset * cur_rotation);
+    touch_state->pre_rot = hduQuaternion(rotation_offset * pre_rotation);
+
+    // Force feedback
+    hduVector3Dd feedback;
+    feedback[0] = touch_state->force[0];
+    feedback[1] = touch_state->force[1];
+    feedback[2] = touch_state->force[2];
+    hdSetDoublev(HD_CURRENT_FORCE, feedback);
+
+    // Button state update
+    int nButtons = 0;
+    hdGetIntegerv(HD_CURRENT_BUTTONS, &nButtons);
+    omni_state->buttons[0] = (nButtons & HD_DEVICE_BUTTON_1) ? 1 : 0;
+
+    // End the frame
+    hdEndFrame(hdGetCurrentDevice());
+    
+}
+```
