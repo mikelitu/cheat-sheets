@@ -2,7 +2,23 @@
 
 This file contains the commands to activate the serial port to read the 6-axial Force/Torque sensor.
 
-## Initial activation
+## Initialize device
+
+Connect the device via USB. Check that the sensor is detected by your PC running the command `lsub`. The sensor should appear on the list as *Bus 001 Device 003: ID 067b:2303 Prolific Technology, Inc. PL2303 Serial Port*. The serial port of the sensor should be named as follows */dev/ttyUSB\** for further processing.
+
+Once we check that the device is connected, we need to give the device reading, writing and executing permissions. For this there are two different options, the first one requires you to run the command every time you restart your computer and the second will grant permission permanently to your user.
+
+```
+sudo cmod 777 /dev/ttyUSB*
+```
+
+or 
+
+```
+sudo adduser YourUserName dialout
+```
+
+## Activate device
 
 To activate the serial connection with the sensor we will use the cutecom software for a more user friendly command sender. To install *cutecom* in Linux use the following commands.
 
