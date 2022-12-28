@@ -18,6 +18,8 @@ or
 sudo adduser YourUserName dialout
 ```
 
+In Windows, you just need to find the corresponding COM port number for the sensor. Save this number for the next steps.
+
 ## Activate device
 
 To activate the serial connection with the sensor we will use the cutecom software for a more user friendly command sender. To install *cutecom* in Linux use the following commands.
@@ -26,6 +28,8 @@ To activate the serial connection with the sensor we will use the cutecom softwa
 $ sudo apt-get update
 $ sudo apt-get install cutecom lrzsz
 ```
+
+In Windows, you can install any alternative to CuteCom. For example, [YAT (Yet Another Terminal)](https://sourceforge.net/projects/y-a-terminal/) or [Tera Term](https://osdn.net/projects/ttssh2/)
 
 Validate the installation running the `$ cutecom` command on the Linux terminal. Once the GUI is opened, find the serial port corresponding to the sensor that should look like the following */dev/ttyUSB_* where the underscore represents any number.
 
