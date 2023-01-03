@@ -9,3 +9,7 @@ This file contains information on how to initialize the Force sensor using cutec
 ## TouchX
 
 This file contains the information on how to install OpenHaptics and set up the TouchX device on both Windows and Linux. Click [here](TouchX-OpenHaptics.md) for more info.
+
+## RealSense
+
+This file contains the information on how to use your **IntelRealSense** stereo camera on your custom projects. Click [here](RealSense.md)
