@@ -1,3 +1,4 @@
 # SOFA
  
-This file is a complementary file to the building tutorial from [SOFA](https://www.sofa-framework.org/) official webpage. The link for the tutorial is [here](https://www.sofa-framework.org/community/doc/getting-started/build/windows/). Additionally, contains information on how to build additional useful packages.
+This file contains information on how to build custom SOFA packages. Focusing on the necessary files and functions you need to include to build a successful plugin. In addition, contains the information on how to write your CMake file.
+
