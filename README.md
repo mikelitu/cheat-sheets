@@ -2,6 +2,10 @@
 
 This repository contains useful short cheat sheets to set up and use different hardware and software.
 
+## Python-VSCode
+
+This file contains the information on how to install and work with different Python versions using Miniconda. Contains a short tutorial on how to setup **VSCode** for efficient coding. Click [here](Python-VSCode.md) for more info.
+
 ## RealSense
 
 This file contains the information on how to use your **IntelRealSense** stereo camera on your custom projects. Click [here](RealSense.md) for more info.
