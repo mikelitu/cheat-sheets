@@ -121,7 +121,7 @@ Good! Now is time to add our library to the extended path for the autocomplete a
 ```json
 {
     "python.analysis.extraPaths": [
-        "C:\Users\yourUser\pathToExternalPackage"
+        "C:/Users/yourUser/pathToExternalPackage"
     ]
 }
 ```

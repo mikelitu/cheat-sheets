@@ -28,7 +28,7 @@ This file contains the information on how to install **OpenHaptics** and set up 
 3. [VSCode](https://code.visualstudio.com/)
 4. [Intel RealSense](https://www.intel.com/content/www/us/en/architecture-and-technology/realsense-overview.html)
 5. [SOFA Framework](https://www.sofa-framework.org/)
-6. [3dSystems](https://www.3dsystems.com/)
+6. [3DSystems](https://www.3dsystems.com/)
 
 ## Other useful Github repositories
 1. [Librealsense](https://github.com/IntelRealSense/librealsense)
