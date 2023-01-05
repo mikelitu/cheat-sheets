@@ -93,9 +93,35 @@ import numpy as np
 my_array = np.random.randint(0, 100, 1)
 print(my_array)
 ```
-This program will generate a random integer between 0 and 100. But, we depend on the [*numpy*](https://numpy.org/doc/stable/index.html) packages which is not available between the pre-install packages on **miniconda3**. To install the package simply, open a terminal and type: `pip install numpy`. This should automatically install *numpy* into your conda environment packages. You can check this by running `pip list` and *numpy* should appear between the installed packages. Now, we can run the program without any error and additionally we will have access to the documentation and the autocomplete of our code :astonished:!
+This program will generate a random integer between 0 and 100. But, we depend on the [*numpy*](https://numpy.org/doc/stable/index.html) packages which is not available between the pre-install packages on **miniconda3**. To install the package simply, open a terminal *(Ctrl+Shift+')* and type: `pip install numpy`. This should automatically install *numpy* into your conda environment packages. You can check this by running `pip list` and *numpy* should appear between the installed packages. Now, we can run the program without any error and additionally we will have access to the documentation and the autocomplete of our code :astonished:!
 
 
 ## Including external packages
 
-Sometimes we will want to have access to external projects from different *python* projects, that are not part of [**PyPi**](https://pypi.org/). For this we will need to create a *settings.json* file, that will configure and extend the path that our *IntelliSense* has access to.
+Sometimes we will want to have access to external projects from different *python* projects, that are not part of [**PyPi**](https://pypi.org/). For this we will need to create a *settings.json* file, that will configure and extend the path that our *IntelliSense* has access to. To create this *settings.json* file, open the function bar *(Ctrl+Shift+P)*, now find **Preferences: Open Workspace Settings (JSON)**. If this is the first time you use this function it will create a new folder on your project directory (check in the left hand bar) named as *.vscode*. Inside this folder you should find the *settings.json* file. That it should like this:
+
+```json
+{
+}
+```
+
+Good! Now is time to add our library to the extended path for the autocomplete and function documentation. For this we just need to add the following line to the *settings.json* file.
+
+**Linux**
+```json
+{
+    "python.analysis.extraPaths": [
+        "/home/$USER/pathToExternalPackage"
+    ]
+}
+```
+
+**Windows**
+
+```json
+{
+    "python.analysis.extraPaths": [
+        "C:\Users\yourUser\pathToExternalPackage"
+    ]
+}
+```
