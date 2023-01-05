@@ -24,10 +24,11 @@ This file contains the information on how to install **OpenHaptics** and set up 
 
 ## References
 1. [Python](https://www.python.org/)
-1. [VSCode](https://code.visualstudio.com/)
-2. [Intel RealSense](https://www.intel.com/content/www/us/en/architecture-and-technology/realsense-overview.html)
-3. [SOFA Framework](https://www.sofa-framework.org/)
-4. [3dSystems](https://www.3dsystems.com/)
+2. [Conda](https://docs.conda.io/en/latest/)
+3. [VSCode](https://code.visualstudio.com/)
+4. [Intel RealSense](https://www.intel.com/content/www/us/en/architecture-and-technology/realsense-overview.html)
+5. [SOFA Framework](https://www.sofa-framework.org/)
+6. [3dSystems](https://www.3dsystems.com/)
 
 ## Other useful Github repositories
 1. [Librealsense](https://github.com/IntelRealSense/librealsense)
