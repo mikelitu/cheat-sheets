@@ -3,20 +3,8 @@
 This file contains information about different applications and implementations for SOFA that I have discovered over the years. For more detailed information on how to start with SOFA, compilation and adding useful plugins follow the instructions in their [tutorial](https://www.sofa-framework.org/community/doc/getting-started/build/linux/). I highly recommend adding the **SofaPython3** plugin as it adds an extra layer to control the simulation and massively simplifies the code.
 
 ## Connecting SOFA with ROS
-For this task we need SOFA with SofaPython3 plugin. I have tested it with the binaries from [ROS2 Foxy](https://docs.ros.org/en/foxy/Installation.html) and **SOFA v22.06** in Ubuntu 20.04. The binaries from Foxy are built using *Python3.8*, so make sure that the executable used to compile SOFA is the same version. If you are in Ubuntu use the following line for the installation (from the original SOFA documentation).
 
-```
-sudo apt install python3.8-dev
-sudo apt-get install python3-distutils \
-&& curl -L https://bootstrap.pypa.io/pip/get-pip.py --output /tmp/get-pip3.py \
-&& python3.8 /tmp/get-pip3.py \
-&& python3.8 -m pip install --upgrade pip \
-&& python3.8 -m pip install numpy scipy
-```
-
-on Windows just install the newest version of Python3.8 from their official webpage. On the CMake GUI just make sure to set the variable **PYTHON_EXECUTABLE** to the path of Python3.8. In the CMake console, you will have printed the used Python version for the compilation, make sure it is 3.8.
-
-For a small example of a *Receiver* and *Sender* go to [SofaROS](SofaROS).
+For more information and a brief example refer to its own [folder](SofaROS).
 
 ## Compiling SOFACuda
 
