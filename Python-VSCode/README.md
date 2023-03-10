@@ -32,7 +32,7 @@ For Windows, download the installer from the official webpage. You can find the 
 >       * C:\Users\yourUser\miniconda3\bin
 >       * C:\Users\yourUser\miniconda3\Scripts
 
-![Steps for adding conda to path](imgs/windows_anaconda.png)
+![Steps for adding conda to path](../imgs/windows_anaconda.png)
 
 Now we need to run a **PowerShell (PS)** terminal as administrator. If we try to run the command `conda init` we will still have the following error. 
 

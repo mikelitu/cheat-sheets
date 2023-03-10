@@ -33,7 +33,7 @@ In Windows, you can install any alternative to CuteCom. For example, [YAT (Yet A
 
 Validate the installation running the `$ cutecom` command on the Linux terminal. Once the GUI is opened, find the serial port corresponding to the sensor that should look like the following */dev/ttyUSB_* where the underscore represents any number.
 
-Click the Open button and in the input area make sure you set the the input mode to CR/LF in the sliding window (look at the image below) ![cutecome](imgs/cutecom.png). 
+Click the Open button and in the input area make sure you set the the input mode to CR/LF in the sliding window (look at the image below) ![cutecome](../imgs/cutecom.png). 
 
 Now we need to start the sensor and setup the frequency at which we want to read the data stream. For this, Open the serial port and write the following commands on the *Input:* cell.
 
