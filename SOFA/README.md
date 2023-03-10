@@ -16,6 +16,8 @@ sudo apt-get install python3-distutils \
 
 on Windows just install the newest version of Python3.8 from their official webpage. On the CMake GUI just make sure to set the variable **PYTHON_EXECUTABLE** to the path of Python3.8. In the CMake console, you will have printed the used Python version for the compilation, make sure it is 3.8.
 
+For a small example of a *Receiver* and *Sender* go to [SofaROS](SofaROS).
+
 ## Compiling SOFACuda
 
 Make sure to have cuda and cuda-toolkits install in your system. You can directly install the latest version available in your system (Ubuntu) using `sudo apt install cuda-toolkit cuda`. Make sure the version is *=11.x*, as it won't compile with the newest versions of cuda. If you have multiple versions of CUDA in your computer you can use the *switch-cuda.sh* file in this folder to change from one version to another and to see all the install CUDA versions. The command to use this file is:
